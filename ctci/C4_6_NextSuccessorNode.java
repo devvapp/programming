@@ -56,15 +56,6 @@ public class C4_6_NextSuccessorNode{
 
         System.out.println();
 
-        /*System.out.println(nextSearch(node20, 20, min));
-        System.out.println(nextSearch(node20, 8, min));
-        System.out.println(nextSearch(node20, 22, min));
-        System.out.println(nextSearch(node20, 4, min));
-        System.out.println(nextSearch(node20, 12, min));
-        System.out.println(nextSearch(node20, 10, min));
-        System.out.println(nextSearch(node20, 14, min));*/
-
-
     }
 
 
@@ -95,22 +86,5 @@ public class C4_6_NextSuccessorNode{
         }
         return next.data;
     }
-
-    /*public int nextSearch(Node root, int search, int min){
-        if(root == null){
-            return null;
-        }
-
-        if(root.data == search) return min;
-        int new_min = min;
-        if(root.data>search){
-            int new_min = root.data<min?root.data:min;
-        }
-
-        if(!search(root.left, search, new_min)){
-            search(root.right, search, new_min);
-        }
-        return new_min;
-    }*/
 
 }
