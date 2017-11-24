@@ -34,6 +34,7 @@ public class GraphRepresentation {
             graph = new HashMap<String, LinkedList<String>>();
         }
 
+        // Add an edge from src to dest
         LinkedList<String> srcAdjList = graph.get(src);
         if(srcAdjList == null){
             srcAdjList = new LinkedList<String>();
@@ -41,6 +42,8 @@ public class GraphRepresentation {
         }
         if(!srcAdjList.contains(dest)){
             srcAdjList.addFirst(dest);
+
+            // As the graph is undirected, add an edge from dest to src also
             LinkedList destAdjList = graph.get(dest);
             if(destAdjList == null){
                 destAdjList = new LinkedList<String>();
