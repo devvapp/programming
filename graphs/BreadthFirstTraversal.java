@@ -6,12 +6,9 @@ import java.util.HashMap;
 import java.util.Queue;
 
 /**
- * BreadthFirstTraversal
+ * BreadthFirstTraversal of a directed graph
  */
 public class BreadthFirstTraversal {
-
-
-
 
     public static void main(String[] args) {
 
@@ -35,10 +32,14 @@ public class BreadthFirstTraversal {
     }
 
 
+    /**
+     * Breadth first traversal of a graph follows similar to bfs of a binary search tree but graph may 
+     * contain loops so we need to avoid visiting the already visited node and 
+     * also ignore the unreachable nodes(Disconnect graphs)
+     */
     public void bfsTraversal(Map<String, LinkedList<String>> graph, String start){
         Queue<String> queue = new LinkedList<String>();
 
-        //LinkedList<String> adjList = (LinkedList<String>) graph.get(start);
         Map<String, Boolean> visitedMap = new HashMap<String, Boolean>();
         queue.add(start);
 
@@ -56,7 +57,6 @@ public class BreadthFirstTraversal {
             }
 
         }
-
         System.out.println();
     }
 }
