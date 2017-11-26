@@ -1,5 +1,6 @@
 //package
 
+import java.util.Arrays;
 
 /**
  * Sorting Algorithms
@@ -36,8 +37,32 @@ public class Sorting {
     }
 
 
+    /**
+     * Binary Insertion Sort - Mix of insertion sort and binary search. 
+     * Find the location of the element to insert using binary search
+     * and move one element to right and then insert the element.
+     * 
+     * In normal insertion, sort it takes O(i) (at ith iteration) in worst case. 
+     * We can reduce it to O(logi) by using binary search.
+     * 
+     * Time complexity - Its still O(n*n)
+     * Space complexity - O(1)
+     * 
+     */
     public void binaryInsertionSort(int[] arr){
 
+        for(int i = 1; i<arr.length ; i++){
+            int key = arr[i];
+
+            // Find location to insert using binary search
+            int j = Math.abs(Arrays.binarySearch(arr, 0, i, key)+1);
+            
+            //Shifting array to one location right
+            System.arraycopy(arr, j, arr, j+1, i-j);
+
+            //Placing element at its correct location
+            arr[j] = key;
+        }
     }
 
     public void quickSort(int[] arr){
