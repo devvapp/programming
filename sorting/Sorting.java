@@ -2,7 +2,7 @@
 
 
 /**
- * InsertionSort
+ * Sorting Algorithms
  */
 public class Sorting {
 
