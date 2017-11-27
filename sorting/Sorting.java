@@ -205,23 +205,127 @@ public class Sorting {
     }
 
     /**
-     * Bubble sort - 
+     * Bubble sort - Swap each element iteratively
      * 
-     * Time complexity - 
-     * Space complexity - 
+     * Time complexity - O(n*n)
+     * Space complexity - O(1)
      */
     public void bubbleSort(int[] arr){
         
+        for(int i=1;i<arr.length;i++){
+            boolean swapped = false;
+            for(int j=1; j<arr.length-i+1; j++){
+                if(arr[j]<arr[j-1]){
+                    // swap temp and arr[i]
+                    int temp = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = temp;
+                    swapped = true;
+                }
+            }
+            if(!swapped){
+                return;
+            }
+        }
     }
 
     /**
-     * Heap sort - 
+     * Heap sort - First max heapify all the elements
+     * Now swap the first element with last element and max heapify 0 to n-1 elements
      * 
      * Time complexity - 
      * Space complexity - 
      */
     public void heapSort(int[] arr){
         
+        int n = arr.length;
+        
+        // Build heap - Start from the bottom of the heap to make 
+        // sure the child nodes are heapified.
+        for (int i = n/2-1; i>=0; i--){
+            heapify(arr, n, i);
+        }
+
+        // One by one extract the max element from heap
+        for (int i=n-1; i>=0; i--)
+        {
+            // Move current root to end
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+
+            // call max heapify on the reduced heap
+            heapify(arr, i, 0);
+        }
+    }
+
+    /**
+     * Get the left child index
+     */
+    public int getLeftChildIndex(int index){
+        return (2*index+1);
+    }
+
+    /**
+     * Get the right child index
+     */
+    public int getRightChildIndex(int index){
+        return (2*index+2);
+    }
+
+    /**
+     * This method will max heapify the sub tree when a root index is provided
+     */
+    public void heapify(int[] heap, int heapSize, int index){
+        
+        int leftChildIndex = getLeftChildIndex(index);
+        int rightChildIndex = getRightChildIndex(index);
+
+        int maxIndex = index;
+
+        //Check to see whild child has the minimum key value than the parent key
+        if(leftChildIndex < heapSize && heap[leftChildIndex] > heap[maxIndex]){
+            maxIndex = leftChildIndex;
+        }
+        if (rightChildIndex < heapSize && heap[rightChildIndex] > heap[maxIndex]){
+            maxIndex = rightChildIndex;
+        }
+
+        if(maxIndex!=index){
+            //Swap Parent and minimum key child index
+            int temp = heap[index];
+            heap[index] = heap[maxIndex];
+            heap[maxIndex] = temp;
+            
+            //Recursively call the heapify method again 
+            heapify(heap, heapSize, maxIndex);
+        }
+    }
+
+    /**
+     * Selection sort - Find the minimum element in unsorted array and place at the current index
+     * 
+     * Time complexity - O(n*n)
+     * Space complexity - O(1)
+     */
+    public void selectionSort(int[] arr){
+        int n = arr.length;
+    
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < n-1; i++){
+            // Find the minimum element in unsorted array
+            int min_index = i;
+            for (int j = i+1; j < n; j++){
+                if (arr[j] < arr[min_index]){
+                    min_index = j;
+                }
+            }
+            // Swap the found minimum element with the first
+            // element
+            int temp = arr[min_index];
+            arr[min_index] = arr[i];
+            arr[i] = temp;
+        }
     }
 
     /**
@@ -252,13 +356,10 @@ public class Sorting {
         System.out.print("Quick Sort -> ");
         sorting.printArray(quickSortArr);
         
-
-
         int[] mergeSortArr = new int[]{9,7,6,15,16,5,10,11};
         sorting.mergeSort(mergeSortArr);
         System.out.print("Merge Sort -> ");
         sorting.printArray(mergeSortArr);
-
 
         int[] bubbleSortArr = new int[]{9,7,6,15,16,5,10,11};
         sorting.bubbleSort(bubbleSortArr);
@@ -269,5 +370,10 @@ public class Sorting {
         sorting.heapSort(heapSortArr);
         System.out.print("Heap Sort -> ");
         sorting.printArray(heapSortArr);
+
+        int[] selectionSortArr = new int[]{9,7,6,15,16,5,10,11};
+        sorting.selectionSort(selectionSortArr);
+        System.out.print("Selection Sort -> ");
+        sorting.printArray(selectionSortArr);
     }
 }

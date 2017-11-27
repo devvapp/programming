@@ -141,9 +141,10 @@ public class MinHeapBuilder {
         int minIndex = index;
 
         //Check to see whild child has the minimum key value than the parent key
-        if(leftChildIndex < heapSize && heap[leftChildIndex] < heap[index]){
+        if(leftChildIndex < heapSize && heap[leftChildIndex] < heap[minIndex]){
             minIndex = leftChildIndex;
-        } else if (rightChildIndex < heapSize && heap[rightChildIndex] < heap[index]){
+        } 
+        if (rightChildIndex < heapSize && heap[rightChildIndex] < heap[minIndex]){
             minIndex = rightChildIndex;
         }
 
