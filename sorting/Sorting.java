@@ -68,9 +68,11 @@ public class Sorting {
     /**
      * Quick sort - Quick sort follows merge sorts divide and conquer method.
      * 
+     * Use when you want to search an array fast without extra memory allocations, 
+     * unlike merge sort which requires extra space and is useful in sorting linked list
      * 
-     * Time complexity - 
-     * Space complexity - 
+     * Time complexity - O(nLogn)
+     * Space complexity - O(1)
      */
     public void quickSort(int[] arr){
         quickSort(arr, 0, arr.length-1);
@@ -125,13 +127,81 @@ public class Sorting {
     }
 
     /**
-     * Merge sort - 
+     * Merge sort - Divide and conquer
      * 
-     * Time complexity - 
-     * Space complexity - 
+     * Useful in sorting linked list
+     * 
+     * Time complexity - O(NlogN)
+     * Space complexity - O(N)
      */
     public void mergeSort(int[] arr){
+        sort(arr, 0, arr.length-1);
+    }
+
+    /**
+     * Sort recursively and merge
+     */
+    public void sort(int[] arr, int low, int high){
+        if(low < high){
+            int mid = (low+high)/2;
+
+            //First sort and then merge
+            sort(arr, low, mid);
+            sort(arr, mid+1, high);
+
+            merge(arr, low, mid, high);
+        }
+    }
+
+    /**
+     * Merge
+     */
+    public void merge(int[] arr, int low, int mid, int high){
         
+        //First copy the elements from low to mid and mid+1 to high into a temp array
+
+        int n1 = mid-low+1;
+        int n2 = high-mid;
+
+        int[] arr1 = new int[n1];
+        int[] arr2 = new int[n2];
+
+        //Copy elements to arr1 and arr2
+        for(int i = 0; i<n1 ; i++){
+            arr1[i] = arr[low+i];
+        }
+        for(int j = 0; j<n2 ; j++){
+            arr2[j] = arr[mid+1+j];
+        }
+
+        int i = 0; 
+        int j = 0;
+        int k = low;
+
+        //Now iterate both arrays
+        while(i<n1 && j<n2){
+            if(arr1[i]<=arr2[j]){
+                arr[k]=arr1[i];
+                i++;
+            } else {
+                arr[k]=arr2[j];
+                j++;
+            }
+            k++;
+        }
+
+        //Copy left over elements from both
+        while(i<n1){
+            arr[k]=arr1[i];
+            i++;
+            k++;
+        }
+        while(j<n2){
+            arr[k]=arr2[j];
+            j++;
+            k++;
+        }
+
     }
 
     /**
