@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class LevenshteinDistance {
 
     public static void main(String[] args) {
-        System.out.println(calculateLevenshteinDistance("abcde", "agc"));
+        System.out.println(calculateLevenshteinDistance("top", "shop"));
 
         System.out.println(levenshteinDistanceUsingMemoization("abcde", "agc"));
     }
@@ -22,7 +22,10 @@ public class LevenshteinDistance {
     public static int calculateLevenshteinDistance(String x, String y){
 
         if(x==null || x.isEmpty()){
-            return y.length();
+            if(y!=null){
+                return y.length();
+            }
+            return 0;
         }
         if(y==null || y.isEmpty()){
             return x.length();
@@ -49,8 +52,11 @@ public class LevenshteinDistance {
     public static int levenshteinDistanceUsingMemoization(String x, String y){
 
         if(x==null || x.isEmpty()){
-            return y.length();
-        } 
+            if(y!=null){
+                return y.length();
+            }
+            return 0;
+        }
         if(y==null || y.isEmpty()){
             return x.length();
         }
