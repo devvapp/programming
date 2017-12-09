@@ -16,6 +16,13 @@ public class MatrixRotation {
             {13, 14, 15, 16}
            };
 
+
+           int[][] arr2 = {
+            {1,  2,  3,  4},
+            {5,  6,  7,  8},
+            {9,  10, 11, 12}
+           };
+
            MatrixRotation mr = new MatrixRotation();
            mr.printArray(arr);
 
@@ -33,12 +40,18 @@ public class MatrixRotation {
 
            mr.rotateNxNMatrixBy90ClockwiseInplaceSwap(arr);
            mr.printArray(arr);
+
+           mr.printArray(arr2);
+           int[][] output2 = mr.rotateNxMMatrixBy90ClockwiseNewArray(arr2);
+           mr.printArray(output2);
+
     }
 
     public void printArray(int[][] arr){
         int n = arr.length;
+        int m = arr[0].length;
         for(int i=0; i<n; i++){
-            for(int j=0; j<n; j++ ){
+            for(int j=0; j<m; j++ ){
                 System.out.printf("%4d", arr[i][j]);
             }
             System.out.println();
@@ -62,6 +75,26 @@ public class MatrixRotation {
         }
         return output;
     }
+
+
+        /**
+     * This method will rotate a NxM matrix using extra memory.
+     * 
+     * Time complexity O(nxm)
+     * 
+     */
+    public int[][] rotateNxMMatrixBy90ClockwiseNewArray(int[][] arr){
+        int n = arr.length;
+        int m = arr[0].length;
+        int[][] output = new int[m][n];
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++ ){
+                output[j][n-1-i] = arr[i][j];
+            }
+        }
+        return output;
+    }
+
 
     /**
      * This method will rotate a NxN matrix 90 degrees in clock wise 
