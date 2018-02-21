@@ -1,0 +1,80 @@
+"You are given a NxN matrix with each cell having an alphabetic character (case-insensitive). The objective is to return a list of all the legal
+ dictionary words in this matrix, using 'Boggle rules'. Boggle rules mean that a word can be formed by starting in any square of the matrix, and 
+moving to any adjacent (cardinal or diagonal) cell as you build up the word. You cannot use the same cell twice for a single word. For example,
+ in the 3x3 matrix below, the word "Boggle" can be formed by starting at the "B" cell, going to the left, down, down, etc. Assume you have a 
+dictionary that you can use to efficiently test for legal words, though you'll need to propose the API for the dictionary. For example:
+
+O B C 
+G L F 
+G H E
+
+returns; "BOGGLE", "LOG", "GOLF" (possibly others I'm not seeing)."
+
+
+
+
+
+public void boggle(char[][] boggle, int size, String[] dictionary){
+    
+    //Create a visited matrix and make everything false
+    boolean[][] visited = new boolean[size][size];
+    for(int i =0; j<size;i++){
+        for(int j =0;j<size;j++){
+            visited[i][j] = false;
+        }
+    }
+    
+    List<String> validWords = new ArrayList<>();
+    
+    //Try to make all combination of words. and 
+    for(int i =0; i<size;i++){
+        for(int j =0;j<size;j++){
+            //As we are appending too many characters better use StringBuilder
+            StringBuilder sb = new StringBuilder();
+            boggle(boggle, visited, i, j, sb, validWords);
+        }
+    }
+    
+    
+}
+
+/**
+ * Recursice array to check all the combination of words 
+*/
+public void boggle(char[][] boggle, boolean[][] visited, int i, int j, StringBuilder sb, List<String> validWords){
+    
+    //First make the visited cell as true
+    visited[i][j] = true;
+    String str = sb.append(boggle[i][j]);
+    
+    //Check if the word is in dictionary and then append to validwords
+    if(isTheWordFoundInDictionary(str)){
+        validWords.add(str);
+    }
+    
+    
+    
+    //Starting from i and j we can go any direction, choosing 8 adjacent cells
+    //So we need to check from i-1 to i+1 rows and j-1 to j+1 columns
+    for(int row = i-1; row<=i+1; row++){
+        for(int col = j-1; col<=j+1; col++){
+            
+            //If the character is not visited then process it
+            if(!visited[row][col]){
+                boggle(boggle, visited, row, col, sb, validWords);
+            }
+        }
+    }
+    
+    
+}
+
+//Check if the word is in dictionary, Check is case insensitive
+public boolean isTheWordFoundInDictionary(String[] dictionary, String str){
+    for(int i =0;i<dictionary.length; i++){
+        if(dictionary[i].equalsIgnoreCase(str)){
+            return true;
+        }
+    }
+    return false;
+}
