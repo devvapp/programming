@@ -32,6 +32,7 @@ public class ArrayRotation{
     }
 
     /**
+     * Time complexity: O(n)
      * Rotate an array using gcd
      */
     public void rotateArray(int[] arr, int d){
@@ -46,21 +47,26 @@ public class ArrayRotation{
             int temp = arr[i];
             int j = i;
 
-            while(true){
-                int k = j+d;
-                if(k<n){
-                    arr[j]=arr[k];
-                    j=k;
-                } else if (k>=n){
-                    arr[j]=temp;
-                    break;
-                }
-            }
+            while (true) {
+				int k = j + d;
+				if (k >= n) {
+					k = k - n;
+				}
+				if (k == i) {
+					break;
+				}
+				arr[j] = arr[k];
+				j = k;
+			}
+			arr[j] = temp;
 
         }
     }
 
     /**
+     * 
+     * Time Complexity: O(n)
+     * 
      * For arr[] = [1, 2, 3, 4, 5, 6, 7], d =2 and n = 7
      * A = [1, 2] and B = [3, 4, 5, 6, 7]
      * Reverse A, we get ArB = [2, 1, 3, 4, 5, 6, 7]
