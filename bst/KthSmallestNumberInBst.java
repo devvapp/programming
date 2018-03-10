@@ -32,7 +32,9 @@ public class KthSmallestNumberInBst {
         smallest.printInOrder(root);
         System.out.println();
         smallest.count=0;
-        smallest.getKthSmallestUsingBst(root, 3);
+        smallest.getKthSmallestInBstUsingDfsRecursive(root, 3);
+
+        smallest.usingBstTweakedDfsRecursive(root,3);
 
     }
 
@@ -60,21 +62,44 @@ public class KthSmallestNumberInBst {
     /**
      * Using BST
      */
-    public void getKthSmallestUsingBst(Node root, int k){
+    public void getKthSmallestInBstUsingDfsRecursive(Node root, int k){
 
         if(root == null) return;
-
-        getKthSmallestUsingBst(root.left, k);
+        getKthSmallestInBstUsingDfsRecursive(root.left, k);
         count++;
-
         if(count==k){
-            System.out.println(k+" smallest number : " + root.val);
+            System.out.println(k+" smallest number using getKthSmallestInBstUsingDfsRecursive : " + root.val);
             return;
         }
-
         if(count<k){
-            getKthSmallestUsingBst(root.right, k);
+            getKthSmallestInBstUsingDfsRecursive(root.right, k);
+        }
+    }
+
+
+    public int usingBstTweakedDfsRecursive(Node root, int k){
+        int leftCount = this.countOfNodes(root.left);
+
+        if(k<=leftCount){
+            return usingBstTweakedDfsRecursive(root.left, k);
+        } else if (k>leftCount+1){
+            return usingBstTweakedDfsRecursive(root.right, k-leftCount-1);
         }
 
+        System.out.println("kth smallest number using usingBstTweakedDfsRecursive : " + root.val);
+        return root.val;
+    }
+
+    public int countOfNodes(Node root){
+        if(root == null){
+            return 0;
+        }
+        return 1 + countOfNodes(root.left) + countOfNodes(root.right);
+    }
+
+
+
+    public int usingDfsIterative(Node root, int k){
+        return 0;
     }
 }
