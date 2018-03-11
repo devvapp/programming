@@ -30,7 +30,8 @@ class MinimumDistance
         int ei = si-1;
         int min = Integer.MAX_VALUE;
         for(int i = 0 ; i<n; i++){
-            //We can separate below loop
+            //We can separate below if else blocks into a seperate method
+            //as both has the same code
             if(arr[i]==x){
                 si = i;
                 int k = si+1;
