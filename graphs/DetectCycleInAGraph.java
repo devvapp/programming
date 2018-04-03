@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * DetectCycleInAGraph
+ * DetectCycleInAGraph - May be incorrect. Please refer the new implementation DirectedCycle.java
  */
 public class DetectCycleInAGraph {
 
