@@ -120,13 +120,11 @@ public class DegreeOfSeparation {
 		while (!sNode.getToVisit().isEmpty() && !dNode.getToVisit().isEmpty()) {
 			String collisionPathNodeKey = getCollisionPathNode(sNode, dNode);
 			if (collisionPathNodeKey != null) {
-				System.out.println("Path Exists");
 				return mergePaths(sNode, dNode, collisionPathNodeKey);
 			}
 
 			collisionPathNodeKey = getCollisionPathNode(dNode, sNode);
 			if (collisionPathNodeKey != null) {
-				System.out.println("Path Exists");
 				return mergePaths(sNode, dNode, collisionPathNodeKey);
 			}
 		}
@@ -188,10 +186,10 @@ public class DegreeOfSeparation {
 		if (path == null) {
 			System.out.println("No path");
 		} else {
+            System.out.println("Path Exists");
 			for (String p : path) {
 				System.out.print(p + " -> ");
 			}
-
 			System.out.println();
 		}
 	}
